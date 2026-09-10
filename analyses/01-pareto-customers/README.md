@@ -64,3 +64,55 @@ the revenue comes from roughly a tenth of the customers.
 python scripts/generate_data.py
 python scripts/run_analysis.py 01-pareto-customers
 ```
+
+---
+
+## Em português
+
+# 01 · Quantos clientes respondem por metade do faturamento?
+
+**A frase que eu dei pro dono:** *"Sete clientes pagam metade de tudo que a
+gente já vendeu. Os outros noventa dividem o resto. Perder um desses sete dói
+mais que perder dez dos outros."*
+
+### Por que essa pergunta
+
+Negócio pequeno sente que tem "muitos clientes". O dado costuma dizer outra
+coisa: poucas pessoas carregam. Saber quem são muda o que se faz na segunda
+de manhã: quem fica sabendo do lançamento primeiro, quem ganha frete de
+cortesia de vez em quando, quem recebe mensagem no aniversário, e pra quem
+você liga quando some.
+
+### Como é respondida
+
+[`query.sql`](query.sql), em quatro passos:
+
+1. **Uma linha por item vendido**, com o cliente colado. Bônus (`status =
+   'bonus'`) fica de fora: é custo, não receita.
+2. **Amassa em uma linha por cliente**: pedidos, itens, total gasto. O
+   `count(distinct order_id)` importa: pedido com três itens é um pedido.
+3. **Ordena por gasto** e calcula duas fatias com funções de janela: a do
+   próprio cliente (`sum() over ()`) e a acumulada
+   (`sum() over (order by spent desc rows unbounded preceding)`).
+4. **Lê a primeira linha em que o acumulado chega a 50%.** A posição dela é
+   a resposta.
+
+O gráfico é a mesma tabela desenhada: as barras são o gasto de cada cliente,
+a linha é o acumulado, e o tracejado marca os 50%.
+
+### Resultado nos dados fictícios
+
+- **7 de 97 clientes = metade do faturamento** (R$ 92,4 mil no total).
+- **33 clientes = 80%.** Os outros 64 dividem os últimos 20%.
+
+Os números de produção são outros, mas a forma é a mesma: metade do
+faturamento vem de mais ou menos um décimo dos clientes.
+
+### O que saiu disso
+
+- Os sete nomes viraram uma lista que o dono guarda. Dois deles estavam há
+  mais de um mês sem comprar; receberam mensagem na mesma semana.
+- A mesma consulta, com filtro de período, entrou na página de relatórios do
+  sistema de gestão: o dono vê "de onde vem o dinheiro" de qualquer mês sem
+  precisar perguntar.
+
