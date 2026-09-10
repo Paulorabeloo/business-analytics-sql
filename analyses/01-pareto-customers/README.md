@@ -71,6 +71,8 @@ python scripts/run_analysis.py 01-pareto-customers
 
 # 01 · Quantos clientes respondem por metade do faturamento?
 
+![Gráfico de Pareto em português](chart-pt.png)
+
 **A frase que eu dei pro dono:** *"Sete clientes pagam metade de tudo que a
 gente já vendeu. Os outros noventa dividem o resto. Perder um desses sete dói
 mais que perder dez dos outros."*

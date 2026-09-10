@@ -32,7 +32,26 @@ def load(con: duckdb.DuckDBPyConnection) -> None:
         con.execute(f"create table {t} as select * from read_csv_auto('{(DATA / t).as_posix()}.csv')")
 
 
-def pareto_chart(rows: list[tuple], cols: list[str], out: Path) -> None:
+TEXTS = {
+    "en": {
+        "title": "Who the revenue depends on",
+        "y": "spent (R$)",
+        "x": "customers, ranked by spend",
+        "y2": "running share of revenue (%)",
+        "cut": "{n} customers = half of revenue",
+    },
+    "pt": {
+        "title": "De quem o faturamento depende",
+        "y": "gasto (R$)",
+        "x": "clientes, do que mais gastou pro que menos",
+        "y2": "fatia acumulada do faturamento (%)",
+        "cut": "{n} clientes = metade do faturamento",
+    },
+}
+
+
+def pareto_chart(rows: list[tuple], cols: list[str], out: Path, lang: str = "en") -> None:
+    t = TEXTS[lang]
     pos = cols.index("position")
     spent = cols.index("spent")
     running = cols.index("running_pct")
@@ -46,8 +65,8 @@ def pareto_chart(rows: list[tuple], cols: list[str], out: Path) -> None:
     ax.set_facecolor(PAPER)
     colors = [GOLD if cut and p <= cut else "#d9d2c5" for p in x]
     ax.bar(x, y_bar, color=colors, width=0.8)
-    ax.set_ylabel("spent (R$)", color=MUTED)
-    ax.set_xlabel("customers, ranked by spend", color=MUTED)
+    ax.set_ylabel(t["y"], color=MUTED)
+    ax.set_xlabel(t["x"], color=MUTED)
     ax.tick_params(colors=MUTED)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
@@ -57,7 +76,7 @@ def pareto_chart(rows: list[tuple], cols: list[str], out: Path) -> None:
     ax2 = ax.twinx()
     ax2.plot(x, y_line, color=INK, linewidth=1.8)
     ax2.set_ylim(0, 100)
-    ax2.set_ylabel("running share of revenue (%)", color=MUTED)
+    ax2.set_ylabel(t["y2"], color=MUTED)
     ax2.tick_params(colors=MUTED)
     ax2.axhline(50, color=MUTED, linewidth=0.8, linestyle=(0, (4, 4)))
     for s in ("top",):
@@ -66,11 +85,11 @@ def pareto_chart(rows: list[tuple], cols: list[str], out: Path) -> None:
     if cut:
         ax2.axvline(cut, color=GOLD, linewidth=1, linestyle=(0, (3, 3)))
         ax2.annotate(
-            f"{cut} customers = half of revenue",
-            xy=(cut, 50), xytext=(cut + 3, 62), color=INK, fontsize=10,
+            t["cut"].format(n=cut),
+            xy=(cut, 50), xytext=(cut + 10, 40), color=INK, fontsize=10,
             arrowprops={"arrowstyle": "-", "color": GOLD},
         )
-    ax.set_title("Who the revenue depends on", loc="left", color=INK, fontsize=13, pad=12)
+    ax.set_title(t["title"], loc="left", color=INK, fontsize=13, pad=12)
     fig.tight_layout()
     fig.savefig(out, facecolor=PAPER)
     plt.close(fig)
@@ -91,7 +110,8 @@ def main(name: str) -> None:
             f.write(",".join(str(v) for v in r) + "\n")
 
     if name.startswith("01-pareto"):
-        pareto_chart(rows, cols, folder / "chart.png")
+        pareto_chart(rows, cols, folder / "chart.png", "en")
+        pareto_chart(rows, cols, folder / "chart-pt.png", "pt")
 
     # a small preview in the terminal
     print(" | ".join(cols))
