@@ -46,8 +46,6 @@ got there.
 
 ## Em português
 
-# Análise de negócio em SQL
-
 Perguntas reais de um negócio real, respondidas em SQL no PostgreSQL.
 
 O negócio vende decants de perfume: frasquinhos de 3, 5 e 10 ml tirados de

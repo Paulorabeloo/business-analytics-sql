@@ -53,7 +53,7 @@ the revenue comes from roughly a tenth of the customers.
 ## What came out of it
 
 - The seven names became a list the owner keeps. Two of them had not bought
-  in over a month; they got a message the same week.
+  in over a month, which put them at the top of the follow-up list.
 - The same query, filtered by period, went into the management system's
   reports page, so the owner can see "where the money comes from" for any
   month without asking.
@@ -68,8 +68,6 @@ python scripts/run_analysis.py 01-pareto-customers
 ---
 
 ## Em português
-
-# 01 · Quantos clientes respondem por metade do faturamento?
 
 ![Gráfico de Pareto em português](chart-pt.png)
 
@@ -113,7 +111,7 @@ faturamento vem de mais ou menos um décimo dos clientes.
 ### O que saiu disso
 
 - Os sete nomes viraram uma lista que o dono guarda. Dois deles estavam há
-  mais de um mês sem comprar; receberam mensagem na mesma semana.
+  mais de um mês sem comprar, e foram pro topo da lista de contato.
 - A mesma consulta, com filtro de período, entrou na página de relatórios do
   sistema de gestão: o dono vê "de onde vem o dinheiro" de qualquer mês sem
   precisar perguntar.
