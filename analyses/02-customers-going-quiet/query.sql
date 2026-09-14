@@ -6,58 +6,62 @@
 -- relative to each customer's own rhythm, or the follow-up list is noise.
 --
 -- Method:
---   1. one row per order that had at least one sold item (gifts excluded)
---   2. for each order, how many days since that customer's previous order
---      (lag() looks at the row above, inside the customer's own partition)
---   3. collapse to one row per customer: orders, last order, usual gap
---      (customers with fewer than 3 orders have no rhythm to compare with)
+--   1. one row per day a customer bought something (gifts excluded).
+--      Not per order: an order can stay open and collect items for weeks,
+--      so "order" would hide purchases. The day is the buying decision.
+--   2. for each purchase day, how many days since that customer's previous
+--      one (lag() looks at the row above, inside the customer's partition)
+--   3. collapse to one row per customer: purchases, last one, usual gap
+--      (customers with fewer than 3 purchase days have no rhythm to compare)
 --   4. "today" is the last day in the data, so the result is reproducible
 --   5. flag whoever has been silent for more than twice their usual gap
---      (the whole list is returned so the chart can show the healthy ones too)
+--      AND for at least 14 days. The floor came from running this on real
+--      data: when regulars buy every 2 or 3 days, "twice the gap" flags a
+--      long weekend. The whole list is returned so the chart shows the
+--      healthy ones too.
 
-with orders_sold as (
-  select
+with purchase_days as (
+  select distinct
     c.id         as customer_id,
     c.name       as customer,
-    o.id         as order_id,
-    o.created_at as order_date
-  from orders o
-  join customers   c on c.id = o.customer_id
-  join order_items i on i.order_id = o.id
-  where i.status <> 'bonus'                     -- an order with only gifts is not a purchase
-  group by 1, 2, 3, 4                           -- one row per order, not per item
+    i.created_at as purchase_day
+  from order_items i
+  join orders    o on o.id = i.order_id
+  join customers c on c.id = o.customer_id
+  where i.status <> 'bonus'                     -- a gift is not a purchase
 ),
 gaps as (
   select
     customer_id,
     customer,
-    order_date,
-    order_date - lag(order_date) over (partition by customer_id
-                                       order by order_date) as days_since_previous
-  from orders_sold
+    purchase_day,
+    purchase_day - lag(purchase_day) over (partition by customer_id
+                                           order by purchase_day) as days_since_previous
+  from purchase_days
 ),
 rhythm as (
   select
     customer_id,
     customer,
-    count(*)                           as orders,
-    max(order_date)                    as last_order,
-    round(avg(days_since_previous), 0) as usual_gap_days   -- the first order has no gap; avg ignores null
+    count(*)                           as purchases,
+    max(purchase_day)                  as last_purchase,
+    round(avg(days_since_previous), 0) as usual_gap_days   -- the first day has no gap; avg ignores null
   from gaps
   group by 1, 2
   having count(*) >= 3
 ),
 today as (
-  select max(created_at) as today from orders
+  select max(created_at) as today from order_items
 )
 select
   r.customer,
-  r.orders,
-  r.last_order,
-  t.today - r.last_order                                  as days_silent,
+  r.purchases,
+  r.last_purchase,
+  t.today - r.last_purchase                                  as days_silent,
   r.usual_gap_days,
-  round((t.today - r.last_order) / r.usual_gap_days, 1)   as times_usual_gap,
-  (t.today - r.last_order) > 2 * r.usual_gap_days         as going_quiet
+  round((t.today - r.last_purchase) / r.usual_gap_days, 1)   as times_usual_gap,
+  (t.today - r.last_purchase) > 2 * r.usual_gap_days
+    and t.today - r.last_purchase >= 14                      as going_quiet
 from rhythm r
 cross join today t
 order by times_usual_gap desc;

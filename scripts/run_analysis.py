@@ -120,7 +120,7 @@ def quiet_chart(rows: list[tuple], cols: list[str], out: Path, lang: str = "en")
     usual = cols.index("usual_gap_days")
     silent = cols.index("days_silent")
     flag = cols.index("going_quiet")
-    data = list(reversed(rows))  # biggest ratio on top
+    data = list(reversed(rows[:20]))  # the 20 with the highest ratio, biggest on top
     y = list(range(len(data)))
 
     fig, ax = plt.subplots(figsize=(10, 0.42 * len(data) + 1.6), dpi=160)
@@ -136,6 +136,66 @@ def quiet_chart(rows: list[tuple], cols: list[str], out: Path, lang: str = "en")
     ax.set_yticks(y)
     ax.set_yticklabels([r[name] for r in data], color=INK, fontsize=9)
     ax.set_xlabel(t["x"], color=MUTED)
+    ax.tick_params(colors=MUTED)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    for s in ("left", "bottom"):
+        ax.spines[s].set_color("#d9d2c5")
+    ax.legend(loc="lower right", frameon=False, fontsize=9, labelcolor=MUTED)
+    ax.set_title(t["title"], loc="left", color=INK, fontsize=13, pad=12)
+    fig.tight_layout()
+    fig.savefig(out, facecolor=PAPER)
+    plt.close(fig)
+
+
+REPEAT_TEXTS = {
+    "en": {
+        "title": "How many times customers bought",
+        "x": "share of customers (%)",
+        "y": "times bought",
+        "units": {"orders": "by orders", "purchase days": "by purchase days"},
+        "rate": "repeat rate {r}%",
+    },
+    "pt": {
+        "title": "Quantas vezes os clientes compraram",
+        "x": "fatia dos clientes (%)",
+        "y": "vezes que comprou",
+        "units": {"orders": "por pedido", "purchase days": "por dia de compra"},
+        "rate": "recompra {r}%",
+    },
+}
+
+
+def repeat_chart(rows: list[tuple], cols: list[str], out: Path, lang: str = "en") -> None:
+    """Grouped bars: the same customers bucketed by two units of 'bought again'."""
+    t = REPEAT_TEXTS[lang]
+    unit = cols.index("unit")
+    bucket = cols.index("bucket")
+    pct = cols.index("pct_of_customers")
+    rate = cols.index("repeat_rate_pct")
+    order = ["1", "2", "3 to 5", "6+"]
+    labels = order if lang == "en" else ["1", "2", "3 a 5", "6+"]
+    units = ["orders", "purchase days"]
+    colors = {"orders": "#d9d2c5", "purchase days": GOLD}
+    data = {u: {r[bucket]: float(r[pct]) for r in rows if r[unit] == u} for u in units}
+    rates = {u: next(float(r[rate]) for r in rows if r[unit] == u) for u in units}
+
+    fig, ax = plt.subplots(figsize=(10, 4.6), dpi=160)
+    fig.patch.set_facecolor(PAPER)
+    ax.set_facecolor(PAPER)
+    h = 0.36
+    for k, u in enumerate(units):
+        ys = [i + (k - 0.5) * h for i in range(len(order))]
+        vals = [data[u].get(b, 0.0) for b in order]
+        ax.barh(ys, vals, height=h, color=colors[u],
+                label=f"{t['units'][u]}, {t['rate'].format(r=rates[u])}")
+        for y, v in zip(ys, vals):
+            ax.text(v + 0.8, y, f"{v:.0f}%", va="center", fontsize=8.5, color=MUTED)
+    ax.set_yticks(range(len(order)))
+    ax.set_yticklabels(labels, color=INK)
+    ax.invert_yaxis()
+    ax.set_xlabel(t["x"], color=MUTED)
+    ax.set_ylabel(t["y"], color=MUTED)
     ax.tick_params(colors=MUTED)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
@@ -168,6 +228,9 @@ def main(name: str) -> None:
     elif name.startswith("02-customers"):
         quiet_chart(rows, cols, folder / "chart.png", "en")
         quiet_chart(rows, cols, folder / "chart-pt.png", "pt")
+    elif name.startswith("03-repeat"):
+        repeat_chart(rows, cols, folder / "chart.png", "en")
+        repeat_chart(rows, cols, folder / "chart-pt.png", "pt")
 
     # a small preview in the terminal
     print(" | ".join(cols))

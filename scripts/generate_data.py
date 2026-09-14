@@ -111,14 +111,23 @@ for c in customers:
     for _ in range(appetite[c["id"]]):
         oid += 1
         when = rand_date(first, stops.get(c["id"], END))
-        shipped = when + timedelta(days=random.randint(1, 6))
+        # some customers keep the order open and add to it over a few weeks
+        # (they wait and ship everything together); the order date is the
+        # first item, each item keeps the day it was actually bought
+        accumulates = random.random() < 0.4
+        n_items = random.choice([1, 1, 1, 2, 2, 3]) + (random.choice([1, 2]) if accumulates else 0)
+        item_days = sorted(
+            min(when + timedelta(days=random.randint(0, 21) if accumulates else 0), END)
+            for _ in range(n_items)
+        )
+        shipped = item_days[-1] + timedelta(days=random.randint(1, 6))
         orders.append({
             "id": oid,
             "customer_id": c["id"],
             "created_at": when.isoformat(),
             "shipped_at": shipped.isoformat() if shipped <= END and random.random() < 0.85 else "",
         })
-        for _ in range(random.choice([1, 1, 1, 2, 2, 3])):
+        for item_day in item_days:
             iid += 1
             b = random.choice(bottles)
             heavy = appetite[c["id"]] >= 6
@@ -133,7 +142,7 @@ for c in customers:
                 "price": round(ml * b["price_per_ml"], 2),
                 "cost": round(ml * cost_per_ml + VIAL_COST[ml] + LABEL_COST, 2),
                 "status": status,
-                "created_at": when.isoformat(),
+                "created_at": item_day.isoformat(),
             })
 
 

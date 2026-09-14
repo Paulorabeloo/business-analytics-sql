@@ -36,15 +36,15 @@ is the running share, and the dashed line marks 50%.
 
 | position | customer | orders | spent | share | running |
 |---|---|---|---|---|---|
-| 1 | Gabriela Teixeira | 14 | 9,099.30 | 9.8% | 9.8% |
-| 2 | Vanessa Santos | 14 | 7,126.82 | 7.7% | 17.5% |
-| 3 | Carla Martins | 14 | 6,309.23 | 6.8% | 24.3% |
+| 1 | Isabela Moreira | 14 | 9,469.72 | 8.8% | 8.8% |
+| 2 | Fernanda Dias | 13 | 8,897.29 | 8.3% | 17.1% |
+| 3 | Carla Martins | 14 | 7,130.74 | 6.6% | 23.7% |
 | ... | | | | | |
-| 8 | Carla Santos | 13 | 4,620.39 | 5.0% | 51.2% |
+| 8 | Elaine Ribeiro | 6 | 5,319.24 | 4.9% | 52.9% |
 | 31 | | | | | 80.0% |
 | 97 | | | | | 100% |
 
-- **8 of 97 customers = half of the revenue** (R$ 92.7k in total).
+- **8 of 97 customers = half of the revenue** (R$ 107.6k in total).
 - **31 customers = 80%.** The remaining 66 share the last 20%.
 
 The production numbers are different, but the shape is the same: half of
@@ -52,7 +52,7 @@ the revenue comes from roughly a tenth of the customers.
 
 ## What came out of it
 
-- The eight names became a list the owner keeps. Three of them had not bought
+- The eight names became a list the owner keeps. Four of them had not bought
   in over a month, which put them at the top of the follow-up list. That
   list is now [analysis 02](../02-customers-going-quiet/).
 - The same query, filtered by period, went into the management system's
@@ -103,7 +103,7 @@ a linha é o acumulado, e o tracejado marca os 50%.
 
 ### Resultado nos dados fictícios
 
-- **8 de 97 clientes = metade do faturamento** (R$ 92,7 mil no total).
+- **8 de 97 clientes = metade do faturamento** (R$ 107,6 mil no total).
 - **31 clientes = 80%.** Os outros 66 dividem os últimos 20%.
 
 Os números de produção são outros, mas a forma é a mesma: metade do
@@ -111,7 +111,7 @@ faturamento vem de mais ou menos um décimo dos clientes.
 
 ### O que saiu disso
 
-- Os oito nomes viraram uma lista que o dono guarda. Três deles estavam há
+- Os oito nomes viraram uma lista que o dono guarda. Quatro deles estavam há
   mais de um mês sem comprar, e foram pro topo da lista de contato. Essa
   lista virou a [análise 02](../02-customers-going-quiet/).
 - A mesma consulta, com filtro de período, entrou na página de relatórios do
