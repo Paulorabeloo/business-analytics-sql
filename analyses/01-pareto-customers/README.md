@@ -1,7 +1,7 @@
 # 01 · How many customers account for half of the revenue?
 
-**The sentence I gave the owner:** *"Seven customers pay for half of everything
-we have ever sold. The other ninety split the rest. Losing one of those seven
+**The sentence I gave the owner:** *"Eight customers pay for half of everything
+we have ever sold. The other ninety split the rest. Losing one of those eight
 hurts more than losing ten of the others."*
 
 ![Pareto chart](chart.png)
@@ -36,24 +36,25 @@ is the running share, and the dashed line marks 50%.
 
 | position | customer | orders | spent | share | running |
 |---|---|---|---|---|---|
-| 1 | Helena Correia | 14 | 8,049.58 | 8.7% | 8.7% |
-| 2 | Bruno Nunes | 14 | 8,049.26 | 8.7% | 17.4% |
-| 3 | Fernanda Cardoso | 14 | 7,542.88 | 8.2% | 25.6% |
+| 1 | Gabriela Teixeira | 14 | 9,099.30 | 9.8% | 9.8% |
+| 2 | Vanessa Santos | 14 | 7,126.82 | 7.7% | 17.5% |
+| 3 | Carla Martins | 14 | 6,309.23 | 6.8% | 24.3% |
 | ... | | | | | |
-| 7 | Igor Santos | 6 | 4,261.27 | 4.6% | 50.2% |
-| 33 | | | | | 80.5% |
+| 8 | Carla Santos | 13 | 4,620.39 | 5.0% | 51.2% |
+| 31 | | | | | 80.0% |
 | 97 | | | | | 100% |
 
-- **7 of 97 customers = half of the revenue** (R$ 92.4k in total).
-- **33 customers = 80%.** The remaining 64 share the last 20%.
+- **8 of 97 customers = half of the revenue** (R$ 92.7k in total).
+- **31 customers = 80%.** The remaining 66 share the last 20%.
 
 The production numbers are different, but the shape is the same: half of
 the revenue comes from roughly a tenth of the customers.
 
 ## What came out of it
 
-- The seven names became a list the owner keeps. Two of them had not bought
-  in over a month, which put them at the top of the follow-up list.
+- The eight names became a list the owner keeps. Three of them had not bought
+  in over a month, which put them at the top of the follow-up list. That
+  list is now [analysis 02](../02-customers-going-quiet/).
 - The same query, filtered by period, went into the management system's
   reports page, so the owner can see "where the money comes from" for any
   month without asking.
@@ -71,8 +72,8 @@ python scripts/run_analysis.py 01-pareto-customers
 
 ![Gráfico de Pareto em português](chart-pt.png)
 
-**A frase que eu dei pro dono:** *"Sete clientes pagam metade de tudo que a
-gente já vendeu. Os outros noventa dividem o resto. Perder um desses sete dói
+**A frase que eu dei pro dono:** *"Oito clientes pagam metade de tudo que a
+gente já vendeu. Os outros noventa dividem o resto. Perder um desses oito dói
 mais que perder dez dos outros."*
 
 ### Por que essa pergunta
@@ -102,16 +103,17 @@ a linha é o acumulado, e o tracejado marca os 50%.
 
 ### Resultado nos dados fictícios
 
-- **7 de 97 clientes = metade do faturamento** (R$ 92,4 mil no total).
-- **33 clientes = 80%.** Os outros 64 dividem os últimos 20%.
+- **8 de 97 clientes = metade do faturamento** (R$ 92,7 mil no total).
+- **31 clientes = 80%.** Os outros 66 dividem os últimos 20%.
 
 Os números de produção são outros, mas a forma é a mesma: metade do
 faturamento vem de mais ou menos um décimo dos clientes.
 
 ### O que saiu disso
 
-- Os sete nomes viraram uma lista que o dono guarda. Dois deles estavam há
-  mais de um mês sem comprar, e foram pro topo da lista de contato.
+- Os oito nomes viraram uma lista que o dono guarda. Três deles estavam há
+  mais de um mês sem comprar, e foram pro topo da lista de contato. Essa
+  lista virou a [análise 02](../02-customers-going-quiet/).
 - A mesma consulta, com filtro de período, entrou na página de relatórios do
   sistema de gestão: o dono vê "de onde vem o dinheiro" de qualquer mês sem
   precisar perguntar.

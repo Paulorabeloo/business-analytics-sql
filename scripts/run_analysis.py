@@ -95,6 +95,59 @@ def pareto_chart(rows: list[tuple], cols: list[str], out: Path, lang: str = "en"
     plt.close(fig)
 
 
+QUIET_TEXTS = {
+    "en": {
+        "title": "Who is going quiet",
+        "x": "days",
+        "usual": "usual gap between orders",
+        "silent": "days since last order",
+        "flag": "silent for more than twice the usual gap",
+    },
+    "pt": {
+        "title": "Quem está sumindo",
+        "x": "dias",
+        "usual": "intervalo normal entre pedidos",
+        "silent": "dias desde o último pedido",
+        "flag": "parado há mais que o dobro do normal",
+    },
+}
+
+
+def quiet_chart(rows: list[tuple], cols: list[str], out: Path, lang: str = "en") -> None:
+    """One line per regular customer: grey bar = usual gap, dot = days silent."""
+    t = QUIET_TEXTS[lang]
+    name = cols.index("customer")
+    usual = cols.index("usual_gap_days")
+    silent = cols.index("days_silent")
+    flag = cols.index("going_quiet")
+    data = list(reversed(rows))  # biggest ratio on top
+    y = list(range(len(data)))
+
+    fig, ax = plt.subplots(figsize=(10, 0.42 * len(data) + 1.6), dpi=160)
+    fig.patch.set_facecolor(PAPER)
+    ax.set_facecolor(PAPER)
+    ax.barh(y, [float(r[usual]) for r in data], color="#d9d2c5", height=0.55, label=t["usual"])
+    for yi, r in zip(y, data):
+        quiet = bool(r[flag])
+        ax.plot([0, float(r[silent])], [yi, yi], color=GOLD if quiet else MUTED, linewidth=1, alpha=0.6)
+        ax.plot(float(r[silent]), yi, "o", color=GOLD if quiet else MUTED, markersize=7)
+    ax.plot([], [], "o", color=GOLD, label=t["flag"])
+    ax.plot([], [], "o", color=MUTED, label=t["silent"])
+    ax.set_yticks(y)
+    ax.set_yticklabels([r[name] for r in data], color=INK, fontsize=9)
+    ax.set_xlabel(t["x"], color=MUTED)
+    ax.tick_params(colors=MUTED)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    for s in ("left", "bottom"):
+        ax.spines[s].set_color("#d9d2c5")
+    ax.legend(loc="lower right", frameon=False, fontsize=9, labelcolor=MUTED)
+    ax.set_title(t["title"], loc="left", color=INK, fontsize=13, pad=12)
+    fig.tight_layout()
+    fig.savefig(out, facecolor=PAPER)
+    plt.close(fig)
+
+
 def main(name: str) -> None:
     folder = ROOT / "analyses" / name
     sql = (folder / "query.sql").read_text(encoding="utf-8")
@@ -112,6 +165,9 @@ def main(name: str) -> None:
     if name.startswith("01-pareto"):
         pareto_chart(rows, cols, folder / "chart.png", "en")
         pareto_chart(rows, cols, folder / "chart-pt.png", "pt")
+    elif name.startswith("02-customers"):
+        quiet_chart(rows, cols, folder / "chart.png", "en")
+        quiet_chart(rows, cols, folder / "chart-pt.png", "pt")
 
     # a small preview in the terminal
     print(" | ".join(cols))

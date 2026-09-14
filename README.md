@@ -17,15 +17,17 @@ queries are the ones that run against the production database.
 | # | Question | What it uses |
 |---|---|---|
 | [01](analyses/01-pareto-customers/) | How many customers account for half of the revenue? | `join`, `group by`, `count(distinct)`, window functions, running total |
+| [02](analyses/02-customers-going-quiet/) | Which customers are going quiet, measured against their own rhythm? | `lag()` over a partition, date arithmetic, `having`, `cross join` |
 
-More to come, one question at a time: who is quietly leaving, repeat-purchase
-rate, which vial size sells, money sitting in unsold bottles.
+More to come, one question at a time: repeat-purchase rate, which vial size
+sells, money sitting in unsold bottles.
 
 ## Reproduce
 
 ```bash
 python scripts/generate_data.py            # writes data/*.csv and data/seed.sql
 python scripts/run_analysis.py 01-pareto-customers
+python scripts/run_analysis.py 02-customers-going-quiet
 ```
 
 `run_analysis.py` uses [DuckDB](https://duckdb.org/) so you do not need a
@@ -63,15 +65,17 @@ no banco de produção.
 | # | Pergunta | O que usa |
 |---|---|---|
 | [01](analyses/01-pareto-customers/) | Quantos clientes respondem por metade do faturamento? | `join`, `group by`, `count(distinct)`, funções de janela, acumulado |
+| [02](analyses/02-customers-going-quiet/) | Quais clientes estão sumindo, medido contra o ritmo de cada um? | `lag()` com partição, conta com datas, `having`, `cross join` |
 
-Mais por vir, uma pergunta de cada vez: quem está sumindo, taxa de recompra,
-qual tamanho mais sai, dinheiro parado em frasco não vendido.
+Mais por vir, uma pergunta de cada vez: taxa de recompra, qual tamanho mais
+sai, dinheiro parado em frasco não vendido.
 
 ### Reproduzir
 
 ```bash
 python scripts/generate_data.py            # gera data/*.csv e data/seed.sql
 python scripts/run_analysis.py 01-pareto-customers
+python scripts/run_analysis.py 02-customers-going-quiet
 ```
 
 O `run_analysis.py` usa [DuckDB](https://duckdb.org/), então não precisa de

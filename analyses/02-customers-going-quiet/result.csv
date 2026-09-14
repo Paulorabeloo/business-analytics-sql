@@ -1,0 +1,13 @@
+customer,orders,last_order,days_silent,usual_gap_days,times_usual_gap,going_quiet
+Sabrina Oliveira,14,2026-07-06,66,4.0,16.5,True
+Vanessa Santos,14,2026-06-05,97,9.0,10.8,True
+Fernanda Dias,13,2026-08-03,38,4.0,9.5,True
+Elaine Ribeiro,6,2026-07-13,59,34.0,1.7,False
+Otávio Freitas,6,2026-08-07,34,21.0,1.6,False
+Aline Nunes,6,2026-08-11,30,19.0,1.6,False
+Isabela Moreira,14,2026-08-29,12,14.0,0.9,False
+Carla Martins,14,2026-09-05,5,17.0,0.3,False
+Larissa Oliveira,6,2026-08-29,12,36.0,0.3,False
+Gabriela Teixeira,14,2026-09-07,3,14.0,0.2,False
+Nelson Costa,6,2026-09-06,4,38.0,0.1,False
+Carla Santos,13,2026-09-10,0,11.0,0.0,False

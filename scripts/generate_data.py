@@ -48,7 +48,7 @@ NAMES = [
 ]
 VIAL_COST = {3: 1.80, 5: 2.10, 10: 3.40, 30: 0.0}
 LABEL_COST = 0.35
-START = date(2026, 6, 1)
+START = date(2026, 1, 5)
 END = date(2026, 9, 10)
 
 
@@ -70,7 +70,7 @@ while len(customers) < 100:
         "name": name,
         "city": city,
         "state": state,
-        "created_at": rand_date(START, END - timedelta(days=10)).isoformat(),
+        "created_at": rand_date(START, END - timedelta(days=60)).isoformat(),
     })
 
 # appetite: how many orders each customer tends to make (Pareto-shaped)
@@ -78,6 +78,15 @@ appetite = {}
 for c in customers:
     r = random.random()
     appetite[c["id"]] = 14 if r < 0.05 else 6 if r < 0.15 else 2 if r < 0.45 else 1
+
+# some repeat buyers stop at some point: real customer bases leak, and the
+# "who is going quiet" analysis needs people who actually went quiet
+stops = {}
+for c in customers:
+    first = date.fromisoformat(c["created_at"])
+    earliest, latest = first + timedelta(days=45), END - timedelta(days=30)
+    if appetite[c["id"]] >= 2 and earliest < latest and random.random() < 0.3:
+        stops[c["id"]] = rand_date(earliest, latest)
 
 # ── bottles: 30 ───────────────────────────────────────────────────────
 bottles = []
@@ -101,7 +110,7 @@ for c in customers:
     first = date.fromisoformat(c["created_at"])
     for _ in range(appetite[c["id"]]):
         oid += 1
-        when = rand_date(first, END)
+        when = rand_date(first, stops.get(c["id"], END))
         shipped = when + timedelta(days=random.randint(1, 6))
         orders.append({
             "id": oid,
