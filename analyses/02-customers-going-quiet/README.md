@@ -1,9 +1,9 @@
 # 02 · Which customers are going quiet?
 
-**The sentence I gave the owner:** *"Five of your eight biggest customers
+**The sentence I gave the owner:** *"Three of your eight biggest customers
 have stopped. Not 'slowed down': each one used to buy every few days and
-has been silent for weeks. If you message five people this week, it is
-these five."*
+has been silent for weeks. If you message three people this week, it is
+these three."*
 
 ![Who is going quiet](chart.png)
 
@@ -48,18 +48,19 @@ been waiting now. A dot far past its bar is the person to call.
 
 | customer | purchases | last purchase | days silent | usual gap | ratio | quiet |
 |---|---|---|---|---|---|---|
-| Juliana Almeida | 4 | 2026-05-13 | 120 | 3 | 40.0 | yes |
-| Sabrina Oliveira | 22 | 2026-07-17 | 55 | 3 | 18.3 | yes |
-| Vanessa Santos | 16 | 2026-06-01 | 101 | 7 | 14.4 | yes |
-| Fernanda Dias | 19 | 2026-08-05 | 36 | 3 | 12.0 | yes |
+| Thiago Pereira | 4 | 2026-04-08 | 155 | 4 | 38.8 | yes |
+| Beatriz Souza | 5 | 2026-05-04 | 129 | 5 | 25.8 | yes |
+| Natália Pereira | 4 | 2026-06-15 | 87 | 5 | 17.4 | yes |
+| Mariana Gomes | 4 | 2026-03-09 | 185 | 11 | 16.8 | yes |
 | ... | | | | | | |
-| Larissa Rocha | 3 | 2026-07-04 | 68 | 77 | 0.9 | no |
+| Diego Pereira | 3 | 2026-07-26 | 46 | 31 | 1.5 | no |
 
-- **36 customers have a rhythm** (3 or more purchase days). **21 of them
-  went quiet**, and five of those are in the top 8 of
-  [analysis 01](../01-pareto-customers/).
-- Larissa Rocha shows why the rule is relative: 68 days silent looks bad,
-  but she buys roughly every 77 days, so she is not flagged.
+- **53 customers have a rhythm** (3 or more purchase days). **32 of them
+  went quiet**, and three of those are in the top 8 of
+  [analysis 01](../01-pareto-customers/). Many of the rest are one-time
+  buyers who spread a single order over a few days and never came back.
+- Diego Pereira shows why the rule is relative: 46 days silent looks bad,
+  but they buy roughly every 31 days, so they are not flagged.
 
 ## What came out of it
 
@@ -82,10 +83,10 @@ python scripts/run_analysis.py 02-customers-going-quiet
 
 ![Quem está sumindo](chart-pt.png)
 
-**A frase que eu dei pro dono:** *"Cinco dos seus oito maiores clientes
+**A frase que eu dei pro dono:** *"Três dos seus oito maiores clientes
 pararam. Não é 'diminuíram': cada um comprava a cada poucos dias, e está há
-semanas sem aparecer. Se você mandar mensagem pra cinco pessoas essa
-semana, são essas cinco."*
+semanas sem aparecer. Se você mandar mensagem pra três pessoas essa
+semana, são essas três."*
 
 ### Por que essa pergunta
 
@@ -125,11 +126,12 @@ bem depois da barra é a pessoa pra chamar.
 
 ### Resultado nos dados fictícios
 
-- **36 clientes têm ritmo** (3 dias de compra ou mais). **21 deles
-  sumiram**, e cinco desses estão no top 8 da
-  [análise 01](../01-pareto-customers/).
-- Larissa Rocha mostra por que a regra é relativa: 68 dias parada parece
-  ruim, mas ela compra mais ou menos a cada 77 dias, então não é marcada.
+- **53 clientes têm ritmo** (3 dias de compra ou mais). **32 deles
+  sumiram**, e três desses estão no top 8 da
+  [análise 01](../01-pareto-customers/). Boa parte do resto é gente que
+  comprou uma vez só, espalhada em alguns dias, e não voltou.
+- Diego Pereira mostra por que a regra é relativa: 46 dias sem comprar
+  parece ruim, mas o ritmo é de um pedido a cada 31 dias, então não entra na lista.
 
 ### O que saiu disso
 

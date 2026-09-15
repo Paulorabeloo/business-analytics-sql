@@ -1,9 +1,9 @@
 # 04 · Which vial size sells, and which one makes the money?
 
 **The sentence I gave the owner:** *"Half of everything you sell is 5 ml,
-so keep that shelf full. But one in five reais comes from the 30 ml, which
-is one sale in twenty. Do not run out of the big vial because it 'never
-sells'."*
+so keep that shelf full. But the money is in the 10 ml: one item in four,
+four reais in ten. And the 30 ml is one sale in twenty-five and almost one
+real in five. Do not run out of the big sizes because they 'never sell'."*
 
 ![Which size sells, which size pays](chart.png)
 
@@ -36,17 +36,18 @@ the size moves units; when the gold bar is longer, it moves money.
 
 | size | items | share of items | revenue | share of revenue | margin |
 |---|---|---|---|---|---|
-| 3 ml | 113 | 22% | 10,652.76 | 10% | 54% |
-| 5 ml | 262 | **51%** | 40,279.55 | 37% | 55% |
-| 10 ml | 112 | 22% | 33,990.00 | 32% | 55% |
-| 30 ml | 27 | 5% | 22,651.20 | **21%** | 56% |
+| 3 ml | 111 | 21% | 10,509.21 | 9% | 53% |
+| 5 ml | 249 | **47%** | 40,308.15 | 33% | 54% |
+| 10 ml | 150 | 28% | 49,684.10 | **41%** | 54% |
+| 30 ml | 21 | 4% | 21,923.10 | 18% | 56% |
 
 - **5 ml is half of the units and a third of the money.** It is the shelf
   that cannot be empty, but it is not the business.
-- **30 ml is one item in twenty and one real in five.** A single lost 30 ml
-  sale costs as much as nine lost 3 ml sales.
-- **3 ml moves a lot and pays little**: 22% of the work at the bench for
-  10% of the revenue. The vial and the label weigh more in a small decant,
+- **10 ml is the business**: 28% of the items, 41% of the revenue.
+- **30 ml is one item in twenty-five and almost one real in five.** A
+  single lost 30 ml sale costs as much as eleven lost 3 ml sales.
+- **3 ml moves a lot and pays little**: 21% of the work at the bench for
+  9% of the revenue. The vial and the label weigh more in a small decant,
   which is why its margin is the lowest.
 
 ## What came out of it
@@ -70,9 +71,10 @@ python scripts/run_analysis.py 04-vial-size-mix
 ![Qual tamanho sai, qual tamanho paga](chart-pt.png)
 
 **A frase que eu dei pro dono:** *"Metade de tudo que você vende é 5 ml,
-então essa prateleira não pode faltar. Mas um real em cada cinco vem do
-30 ml, que é uma venda em vinte. Não deixa acabar o frasco grande porque
-ele 'nunca sai'."*
+então essa prateleira não pode faltar. Mas o dinheiro está no 10 ml: um
+item em quatro, quatro reais em dez. E o 30 ml é uma venda em vinte e
+cinco e quase um real em cinco. Não deixa acabar os tamanhos grandes
+porque eles 'nunca saem'."*
 
 ### Por que essa pergunta
 
@@ -103,9 +105,10 @@ gira unidade; barra dourada maior, gira dinheiro.
 
 - **5 ml é metade das unidades e um terço do dinheiro.** É a prateleira
   que não pode ficar vazia, mas não é o negócio.
-- **30 ml é um item em vinte e um real em cinco.** Uma venda de 30 ml
-  perdida custa o mesmo que nove de 3 ml.
-- **3 ml gira muito e paga pouco**: 22% do trabalho na bancada por 10% do
+- **10 ml é o negócio**: 28% dos itens, 41% do faturamento.
+- **30 ml é um item em vinte e cinco e quase um real em cinco.** Uma venda
+  de 30 ml perdida custa o mesmo que onze de 3 ml.
+- **3 ml gira muito e paga pouco**: 21% do trabalho na bancada por 9% do
   faturamento. Frasquinho e etiqueta pesam mais num decant pequeno, por
   isso a margem é a menor.
 

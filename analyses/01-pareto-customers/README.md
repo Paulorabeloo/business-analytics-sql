@@ -1,7 +1,7 @@
 # 01 · How many customers account for half of the revenue?
 
 **The sentence I gave the owner:** *"Eight customers pay for half of everything
-we have ever sold. The other ninety split the rest. Losing one of those eight
+we have ever sold. The other 91 split the rest. Losing one of those eight
 hurts more than losing ten of the others."*
 
 ![Pareto chart](chart.png)
@@ -36,23 +36,23 @@ is the running share, and the dashed line marks 50%.
 
 | position | customer | orders | spent | share | running |
 |---|---|---|---|---|---|
-| 1 | Isabela Moreira | 14 | 9,469.72 | 8.8% | 8.8% |
-| 2 | Fernanda Dias | 13 | 8,897.29 | 8.3% | 17.1% |
-| 3 | Carla Martins | 14 | 7,130.74 | 6.6% | 23.7% |
+| 1 | Isabela Moreira | 13 | 12,910.86 | 10.5% | 10.5% |
+| 2 | Vanessa Santos | 13 | 10,263.04 | 8.4% | 18.9% |
+| 3 | Carla Santos | 14 | 7,899.93 | 6.5% | 25.4% |
 | ... | | | | | |
-| 8 | Elaine Ribeiro | 6 | 5,319.24 | 4.9% | 52.9% |
-| 31 | | | | | 80.0% |
-| 97 | | | | | 100% |
+| 8 | Nelson Costa | 6 | 3,694.27 | 3.0% | 50.7% |
+| 35 | | | | | 80.4% |
+| 99 | | | | | 100% |
 
-- **8 of 97 customers = half of the revenue** (R$ 107.6k in total).
-- **31 customers = 80%.** The remaining 66 share the last 20%.
+- **8 of 99 customers = half of the revenue** (R$ 122.4k in total).
+- **35 customers = 80%.** The remaining 64 share the last 20%.
 
 The production numbers are different, but the shape is the same: half of
 the revenue comes from roughly a tenth of the customers.
 
 ## What came out of it
 
-- The eight names became a list the owner keeps. Four of them had not bought
+- The eight names became a list the owner keeps. Two of them had not bought
   in over a month, which put them at the top of the follow-up list. That
   list is now [analysis 02](../02-customers-going-quiet/).
 - The same query, filtered by period, went into the management system's
@@ -73,7 +73,7 @@ python scripts/run_analysis.py 01-pareto-customers
 ![Gráfico de Pareto em português](chart-pt.png)
 
 **A frase que eu dei pro dono:** *"Oito clientes pagam metade de tudo que a
-gente já vendeu. Os outros noventa dividem o resto. Perder um desses oito dói
+gente já vendeu. Os outros 91 dividem o resto. Perder um desses oito dói
 mais que perder dez dos outros."*
 
 ### Por que essa pergunta
@@ -103,15 +103,15 @@ a linha é o acumulado, e o tracejado marca os 50%.
 
 ### Resultado nos dados fictícios
 
-- **8 de 97 clientes = metade do faturamento** (R$ 107,6 mil no total).
-- **31 clientes = 80%.** Os outros 66 dividem os últimos 20%.
+- **8 de 99 clientes = metade do faturamento** (R$ 122,4 mil no total).
+- **35 clientes = 80%.** Os outros 64 dividem os últimos 20%.
 
 Os números de produção são outros, mas a forma é a mesma: metade do
 faturamento vem de mais ou menos um décimo dos clientes.
 
 ### O que saiu disso
 
-- Os oito nomes viraram uma lista que o dono guarda. Quatro deles estavam há
+- Os oito nomes viraram uma lista que o dono guarda. Dois deles estavam há
   mais de um mês sem comprar, e foram pro topo da lista de contato. Essa
   lista virou a [análise 02](../02-customers-going-quiet/).
 - A mesma consulta, com filtro de período, entrou na página de relatórios do

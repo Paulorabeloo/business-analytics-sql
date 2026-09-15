@@ -42,13 +42,13 @@ both so the gap is visible instead of silently picking one.
 
 | unit | bought once | 2 | 3 to 5 | 6+ | repeat rate |
 |---|---|---|---|---|---|
-| orders | 54% | 34% | 1% | 11% | **46%** |
-| purchase days | 35% | 28% | 24% | 13% | **65%** |
+| orders | 54% | 33% | 1% | 11% | **46%** |
+| purchase days | 33% | 13% | 37% | 16% | **67%** |
 
-- By purchase days, **65% of customers bought more than once**. By
-  orders, 46%. Same 97 customers.
+- By purchase days, **67% of customers bought more than once**. By
+  orders, 46%. Same 99 customers.
 - The "3 to 5" bucket is where the difference lives: by orders it is
-  almost empty (1%), by purchase days it is a quarter of the base. Those
+  almost empty (1%), by purchase days it is more than a third of the base. Those
   are the customers who buy on several days and ship once.
 
 ## What came out of it
@@ -108,10 +108,10 @@ dois pra diferença ficar visível em vez de escolher um em silêncio.
 
 ### Resultado nos dados fictícios
 
-- Por dia de compra, **65% dos clientes compraram mais de uma vez**. Por
-  pedido, 46%. Os mesmos 97 clientes.
+- Por dia de compra, **67% dos clientes compraram mais de uma vez**. Por
+  pedido, 46%. Os mesmos 99 clientes.
 - A faixa "3 a 5" é onde mora a diferença: por pedido está quase vazia
-  (1%), por dia de compra é um quarto da base. São os clientes que compram
+  (1%), por dia de compra é mais de um terço da base. São os clientes que compram
   em vários dias e recebem de uma vez.
 
 ### O que saiu disso

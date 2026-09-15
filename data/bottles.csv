@@ -1,31 +1,61 @@
 id,name,brand,volume_ml,cost_total,price_per_ml,created_at
-1,Nocturne 42,Oud & Co,100,1235.0,28.76,2026-01-31
-2,Cedar Line,Verdant,100,1453.0,32.14,2025-12-26
-3,Ambre Sauvage,Casa Vetiver,100,1500.0,37.32,2026-01-02
-4,Rose Noire,Casa Vetiver,100,1569.0,32.83,2025-12-20
-5,Santal Blanc,Atelier Nocturne,100,1069.0,22.7,2026-01-19
-6,Iris Gris,Casa Vetiver,50,438.5,19.01,2025-12-25
-7,Vetiver Fumé,Oud & Co,75,546.0,15.52,2026-01-14
-8,Oud Impérial,Oud & Co,100,725.0,15.75,2026-02-03
-9,Neroli Solaire,Maison Aurelle,100,2492.0,62.29,2026-02-02
-10,Musc Pâle,Maison Aurelle,100,1361.0,34.84,2026-01-04
-11,Tabac Doux,Oud & Co,100,2307.0,52.52,2026-02-01
-12,Fig Verte,Casa Vetiver,100,2200.0,49.32,2026-01-02
-13,Cuir Velours,Oud & Co,100,1571.0,33.55,2026-01-28
-14,Jasmin Nuit,Oud & Co,100,2048.0,52.09,2026-01-24
-15,Encens Froid,Oud & Co,100,654.0,15.14,2026-01-27
-16,Pêche Ambrée,Oud & Co,50,384.0,15.32,2026-01-14
-17,Bois Sec,Oud & Co,75,525.75,14.93,2026-01-14
-18,Menthe Sauvage,Oud & Co,100,1275.0,26.71,2026-02-14
-19,Safran Doré,Maison Aurelle,100,1105.0,24.63,2026-02-01
-20,Lavande Noire,Atelier Nocturne,100,704.0,14.48,2025-12-20
-21,Cardamome,Casa Vetiver,50,1054.0,42.99,2025-12-17
-22,Poivre Rose,Casa Vetiver,100,905.0,20.2,2025-12-23
-23,Tonka Brune,Oud & Co,100,2496.0,59.65,2026-02-03
-24,Benjoin Clair,Verdant,100,936.0,24.1,2026-01-30
-25,Gingembre Vif,Casa Vetiver,50,1078.0,55.52,2025-12-22
-26,Mimosa Tendre,Atelier Nocturne,100,651.0,14.99,2026-02-12
-27,Patchouli 7,Casa Vetiver,100,1393.0,27.21,2026-01-29
-28,Héliotrope,Atelier Nocturne,75,603.0,20.06,2026-01-23
-29,Ambrette,Verdant,50,1096.0,53.66,2026-01-07
-30,Cade Fumé,Atelier Nocturne,100,1457.0,28.39,2026-01-26
+1,Nocturne 42,Oud & Co,100,1235.0,28.76,2026-02-02
+2,Cedar Line,Verdant,100,1453.0,32.14,2026-02-12
+3,Ambre Sauvage,Casa Vetiver,100,1500.0,37.32,2026-02-02
+4,Rose Noire,Atelier Nocturne,100,1569.0,34.64,2025-12-31
+5,Santal Blanc,Atelier Nocturne,100,1069.0,26.99,2026-01-06
+6,Iris Gris,Casa Vetiver,75,676.5,21.6,2026-01-09
+7,Vetiver Fumé,Oud & Co,100,1415.0,31.0,2026-01-19
+8,Oud Impérial,Verdant,100,1379.0,35.33,2026-02-03
+9,Neroli Solaire,Atelier Nocturne,100,1361.0,28.7,2025-12-16
+10,Musc Pâle,Verdant,100,1676.0,41.23,2026-02-01
+11,Tabac Doux,Oud & Co,100,1039.0,19.95,2026-01-12
+12,Fig Verte,Oud & Co,100,2048.0,52.09,2026-02-07
+13,Cuir Velours,Verdant,100,654.0,15.01,2026-01-10
+14,Jasmin Nuit,Oud & Co,50,942.5,38.21,2025-12-24
+15,Encens Froid,Atelier Nocturne,100,1255.0,26.81,2026-01-14
+16,Pêche Ambrée,Oud & Co,100,2104.0,43.69,2026-02-07
+17,Bois Sec,Maison Aurelle,100,639.0,16.61,2026-01-19
+18,Menthe Sauvage,Maison Aurelle,75,1425.0,46.13,2026-02-03
+19,Safran Doré,Casa Vetiver,75,1708.5,47.09,2026-01-24
+20,Lavande Noire,Oud & Co,50,864.0,41.29,2025-12-29
+21,Cardamome,Maison Aurelle,100,936.0,22.88,2026-01-23
+22,Poivre Rose,Atelier Nocturne,100,816.0,18.79,2025-12-17
+23,Tonka Brune,Maison Aurelle,100,2483.0,57.47,2025-12-28
+24,Benjoin Clair,Atelier Nocturne,75,603.0,20.06,2026-02-03
+25,Gingembre Vif,Maison Aurelle,50,1096.0,46.98,2026-01-21
+26,Mimosa Tendre,Atelier Nocturne,100,738.0,14.09,2026-01-26
+27,Patchouli 7,Oud & Co,100,811.0,19.42,2026-01-08
+28,Héliotrope,Atelier Nocturne,75,1551.0,48.21,2026-01-26
+29,Ambrette,Verdant,100,1530.0,31.94,2026-02-06
+30,Cade Fumé,Atelier Nocturne,75,1695.75,56.91,2025-12-21
+31,Nocturne 42 II,Atelier Nocturne,100,1740.0,33.41,2026-07-11
+32,Cedar Line II,Atelier Nocturne,100,964.0,23.7,2026-05-29
+33,Ambre Sauvage II,Verdant,100,2361.0,45.03,2026-06-14
+34,Rose Noire II,Oud & Co,50,541.5,24.79,2026-07-18
+35,Santal Blanc II,Oud & Co,100,1892.0,46.45,2026-08-08
+36,Iris Gris II,Atelier Nocturne,100,1043.0,24.66,2026-06-06
+37,Vetiver Fumé II,Oud & Co,100,1707.0,44.34,2026-07-02
+38,Oud Impérial II,Atelier Nocturne,100,1304.0,27.57,2026-07-30
+39,Neroli Solaire II,Maison Aurelle,50,1021.5,49.44,2026-06-24
+40,Musc Pâle II,Atelier Nocturne,75,737.25,23.66,2026-08-06
+41,Tabac Doux II,Casa Vetiver,100,1794.0,37.81,2026-04-30
+42,Fig Verte II,Casa Vetiver,75,903.75,25.21,2026-08-19
+43,Cuir Velours II,Oud & Co,100,1184.0,23.35,2026-05-07
+44,Jasmin Nuit II,Oud & Co,100,1169.0,25.0,2026-08-05
+45,Encens Froid II,Maison Aurelle,100,2482.0,61.44,2026-08-05
+46,Pêche Ambrée II,Casa Vetiver,100,748.0,14.99,2026-04-18
+47,Bois Sec II,Maison Aurelle,100,770.0,17.64,2026-06-07
+48,Menthe Sauvage II,Verdant,100,1792.0,38.82,2026-06-01
+49,Safran Doré II,Atelier Nocturne,100,2320.0,53.31,2026-07-23
+50,Lavande Noire II,Casa Vetiver,100,2520.0,58.91,2026-04-30
+51,Cardamome II,Verdant,50,457.0,17.85,2026-05-19
+52,Poivre Rose II,Atelier Nocturne,100,1501.0,28.86,2026-08-03
+53,Tonka Brune II,Maison Aurelle,100,2006.0,47.77,2026-07-30
+54,Benjoin Clair II,Oud & Co,100,1922.0,38.06,2026-05-25
+55,Gingembre Vif II,Maison Aurelle,75,1812.75,46.93,2026-05-11
+56,Mimosa Tendre II,Oud & Co,100,1790.0,35.57,2026-06-17
+57,Patchouli 7 II,Verdant,100,1999.0,45.54,2026-06-13
+58,Héliotrope II,Atelier Nocturne,50,898.0,41.71,2026-07-24
+59,Ambrette II,Atelier Nocturne,50,529.0,24.37,2026-04-10
+60,Cade Fumé II,Atelier Nocturne,75,1155.75,31.24,2026-07-27

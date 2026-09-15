@@ -20,8 +20,10 @@ queries are the ones that run against the production database.
 | [02](analyses/02-customers-going-quiet/) | Which customers are going quiet, measured against their own rhythm? | `lag()` over a partition, date arithmetic, `having`, `cross join` |
 | [03](analyses/03-repeat-purchase-rate/) | How many customers come back, and why the answer depends on the unit? | `count(distinct)`, `union all`, `case` buckets, `filter`, window over a partition |
 | [04](analyses/04-vial-size-mix/) | Which vial size sells, and which one makes the money? | `group by`, two shares with `sum() over ()`, margin per group |
+| [05](analyses/05-money-in-bottles/) | How much money is sitting in bottles that have not sold yet, and which ones stopped moving? | `left join`, `coalesce`, `greatest`, date arithmetic, share of total |
 
-More to come, one question at a time: money sitting in unsold bottles.
+Five questions so far. The next ones come from whatever the owner asks
+next; that is how the list was built.
 
 ## Reproduce
 
@@ -31,6 +33,7 @@ python scripts/run_analysis.py 01-pareto-customers
 python scripts/run_analysis.py 02-customers-going-quiet
 python scripts/run_analysis.py 03-repeat-purchase-rate
 python scripts/run_analysis.py 04-vial-size-mix
+python scripts/run_analysis.py 05-money-in-bottles
 ```
 
 `run_analysis.py` uses [DuckDB](https://duckdb.org/) so you do not need a
@@ -71,9 +74,10 @@ no banco de produção.
 | [02](analyses/02-customers-going-quiet/) | Quais clientes estão sumindo, medido contra o ritmo de cada um? | `lag()` com partição, conta com datas, `having`, `cross join` |
 | [03](analyses/03-repeat-purchase-rate/) | Quantos clientes voltam, e por que a resposta depende da unidade? | `count(distinct)`, `union all`, faixas com `case`, `filter`, janela com partição |
 | [04](analyses/04-vial-size-mix/) | Qual tamanho mais sai, e qual traz o dinheiro? | `group by`, duas fatias com `sum() over ()`, margem por grupo |
+| [05](analyses/05-money-in-bottles/) | Quanto dinheiro está parado em frasco não vendido, e quais pararam de girar? | `left join`, `coalesce`, `greatest`, conta com datas, fatia do total |
 
-Mais por vir, uma pergunta de cada vez: dinheiro parado em frasco não
-vendido.
+Cinco perguntas até aqui. As próximas vêm do que o dono perguntar; foi
+assim que a lista nasceu.
 
 ### Reproduzir
 
@@ -83,6 +87,7 @@ python scripts/run_analysis.py 01-pareto-customers
 python scripts/run_analysis.py 02-customers-going-quiet
 python scripts/run_analysis.py 03-repeat-purchase-rate
 python scripts/run_analysis.py 04-vial-size-mix
+python scripts/run_analysis.py 05-money-in-bottles
 ```
 
 O `run_analysis.py` usa [DuckDB](https://duckdb.org/), então não precisa de

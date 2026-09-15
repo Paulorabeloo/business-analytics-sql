@@ -88,20 +88,30 @@ for c in customers:
     if appetite[c["id"]] >= 2 and earliest < latest and random.random() < 0.3:
         stops[c["id"]] = rand_date(earliest, latest)
 
-# ── bottles: 30 ───────────────────────────────────────────────────────
+# ── bottles: 60 (two batches of the same 30 names), stock tracked ──
+# Real shelves are uneven: a few bottles everyone wants, many that move
+# slowly, and some that were bought and barely sold. popularity drives the
+# draw below; remaining_ml stops a bottle from selling more than it holds.
 bottles = []
-for i, n in enumerate(NAMES, start=1):
+popularity = {}
+remaining_ml = {}
+for i, n in enumerate(NAMES * 2, start=1):
     volume = random.choice([50, 75, 100, 100, 100])
     cost_per_ml = round(random.uniform(6, 26), 2)
+    batch = 1 if i <= len(NAMES) else 2
+    created = rand_date(START - timedelta(days=20), START + timedelta(days=40)) if batch == 1 \
+        else rand_date(START + timedelta(days=90), END - timedelta(days=20))
     bottles.append({
         "id": i,
-        "name": n,
+        "name": n if batch == 1 else f"{n} II",
         "brand": random.choice(BRANDS),
         "volume_ml": volume,
         "cost_total": round(cost_per_ml * volume, 2),
         "price_per_ml": round(cost_per_ml * random.uniform(1.9, 2.6), 2),
-        "created_at": rand_date(START - timedelta(days=20), START + timedelta(days=40)).isoformat(),
+        "created_at": created.isoformat(),
     })
+    popularity[i] = random.choice([1, 1, 2, 3, 5, 8, 13])
+    remaining_ml[i] = volume
 
 # ── orders and items ─────────────────────────────────────────────────
 orders, items = [], []
@@ -128,10 +138,18 @@ for c in customers:
             "shipped_at": shipped.isoformat() if shipped <= END and random.random() < 0.85 else "",
         })
         for item_day in item_days:
-            iid += 1
-            b = random.choice(bottles)
             heavy = appetite[c["id"]] >= 6
             ml = random.choices([3, 5, 10, 30], weights=[15, 45, 30, 10] if heavy else [30, 50, 20, 0])[0]
+            # only bottles already on the shelf that day, with enough left
+            candidates = [
+                x for x in bottles
+                if x["created_at"] <= item_day.isoformat() and remaining_ml[x["id"]] >= ml
+            ]
+            if not candidates:
+                continue
+            b = random.choices(candidates, weights=[popularity[x["id"]] for x in candidates])[0]
+            remaining_ml[b["id"]] -= ml
+            iid += 1
             cost_per_ml = b["cost_total"] / b["volume_ml"]
             status = random.choices(["paid", "pending", "bonus"], weights=[70, 24, 6])[0]
             items.append({

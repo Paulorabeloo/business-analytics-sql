@@ -269,6 +269,62 @@ def mix_chart(rows: list[tuple], cols: list[str], out: Path, lang: str = "en") -
     plt.close(fig)
 
 
+MONEY_TEXTS = {
+    "en": {
+        "title": "Money sitting in bottles",
+        "x": "cost still on the shelf (R$)",
+        "moving": "sold something in the last 60 days",
+        "stalled": "no sale in 60 days or more",
+    },
+    "pt": {
+        "title": "Dinheiro parado em frasco",
+        "x": "custo ainda na prateleira (R$)",
+        "moving": "vendeu algo nos últimos 60 dias",
+        "stalled": "sem venda há 60 dias ou mais",
+    },
+}
+
+
+def money_chart(rows: list[tuple], cols: list[str], out: Path, lang: str = "en") -> None:
+    """Horizontal bars, one per bottle, biggest amount on top; stalled ones in gold."""
+    t = MONEY_TEXTS[lang]
+    name = cols.index("name")
+    cost = cols.index("cost_sitting")
+    stalled = cols.index("stalled")
+    pct = cols.index("pct_sold")
+    data = list(reversed(rows[:20]))
+    ys = list(range(len(data)))
+
+    fig, ax = plt.subplots(figsize=(10, 0.36 * len(data) + 1.6), dpi=160)
+    fig.patch.set_facecolor(PAPER)
+    ax.set_facecolor(PAPER)
+    vals = [float(r[cost]) for r in data]
+    colors = [GOLD if bool(r[stalled]) else "#d9d2c5" for r in data]
+    ax.barh(ys, vals, color=colors, height=0.62)
+    for y, v, r in zip(ys, vals, data):
+        money = f"{v:,.0f}" if lang == "en" else f"{v:,.0f}".replace(",", ".")
+        sold = f"{float(r[pct]):.0f}% sold" if lang == "en" else f"{float(r[pct]):.0f}% vendido"
+        ax.text(v + max(vals) * 0.01, y, f"R$ {money}  ·  {sold}", va="center", fontsize=8, color=MUTED)
+    ax.set_yticks(ys)
+    ax.set_yticklabels([r[name] for r in data], color=INK, fontsize=9)
+    ax.set_xlabel(t["x"], color=MUTED)
+    ax.set_xlim(0, max(vals) * 1.3)
+    ax.tick_params(colors=MUTED)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    for s in ("left", "bottom"):
+        ax.spines[s].set_color("#d9d2c5")
+    from matplotlib.patches import Patch
+    ax.legend(
+        handles=[Patch(color="#d9d2c5", label=t["moving"]), Patch(color=GOLD, label=t["stalled"])],
+        loc="lower right", frameon=False, fontsize=9, labelcolor=MUTED,
+    )
+    ax.set_title(t["title"], loc="left", color=INK, fontsize=13, pad=12)
+    fig.tight_layout()
+    fig.savefig(out, facecolor=PAPER)
+    plt.close(fig)
+
+
 def main(name: str) -> None:
     folder = ROOT / "analyses" / name
     sql = (folder / "query.sql").read_text(encoding="utf-8")
@@ -295,6 +351,9 @@ def main(name: str) -> None:
     elif name.startswith("04-vial"):
         mix_chart(rows, cols, folder / "chart.png", "en")
         mix_chart(rows, cols, folder / "chart-pt.png", "pt")
+    elif name.startswith("05-money"):
+        money_chart(rows, cols, folder / "chart.png", "en")
+        money_chart(rows, cols, folder / "chart-pt.png", "pt")
 
     # a small preview in the terminal
     print(" | ".join(cols))
