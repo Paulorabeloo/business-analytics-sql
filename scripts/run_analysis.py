@@ -208,6 +208,67 @@ def repeat_chart(rows: list[tuple], cols: list[str], out: Path, lang: str = "en"
     plt.close(fig)
 
 
+MIX_TEXTS = {
+    "en": {
+        "title": "Which size sells, which size pays",
+        "x": "share (%)",
+        "y": "vial size",
+        "items": "share of items sold",
+        "revenue": "share of revenue",
+        "margin": "margin {m}%",
+    },
+    "pt": {
+        "title": "Qual tamanho sai, qual tamanho paga",
+        "x": "fatia (%)",
+        "y": "tamanho",
+        "items": "fatia dos itens vendidos",
+        "revenue": "fatia do faturamento",
+        "margin": "margem {m}%",
+    },
+}
+
+
+def mix_chart(rows: list[tuple], cols: list[str], out: Path, lang: str = "en") -> None:
+    """Grouped bars per size: share of items vs share of revenue, margin as a label."""
+    t = MIX_TEXTS[lang]
+    ml = cols.index("ml")
+    pi = cols.index("pct_items")
+    pr = cols.index("pct_revenue")
+    mg = cols.index("margin_pct")
+    sizes = [r[ml] for r in rows]
+    labels = [f"{s} ml" for s in sizes]
+
+    fig, ax = plt.subplots(figsize=(10, 4.4), dpi=160)
+    fig.patch.set_facecolor(PAPER)
+    ax.set_facecolor(PAPER)
+    h = 0.36
+    ys = list(range(len(rows)))
+    v_items = [float(r[pi]) for r in rows]
+    v_rev = [float(r[pr]) for r in rows]
+    ax.barh([y - h / 2 for y in ys], v_items, height=h, color="#d9d2c5", label=t["items"])
+    ax.barh([y + h / 2 for y in ys], v_rev, height=h, color=GOLD, label=t["revenue"])
+    for y, a, b, r in zip(ys, v_items, v_rev, rows):
+        ax.text(a + 0.8, y - h / 2, f"{a:.0f}%", va="center", fontsize=8.5, color=MUTED)
+        ax.text(b + 0.8, y + h / 2, f"{b:.0f}%  ·  " + t["margin"].format(m=f"{float(r[mg]):.0f}"),
+                va="center", fontsize=8.5, color=MUTED)
+    ax.set_yticks(ys)
+    ax.set_yticklabels(labels, color=INK)
+    ax.invert_yaxis()
+    ax.set_xlabel(t["x"], color=MUTED)
+    ax.set_ylabel(t["y"], color=MUTED)
+    ax.set_xlim(0, max(v_items + v_rev) * 1.35)
+    ax.tick_params(colors=MUTED)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    for s in ("left", "bottom"):
+        ax.spines[s].set_color("#d9d2c5")
+    ax.legend(loc="lower right", frameon=False, fontsize=9, labelcolor=MUTED)
+    ax.set_title(t["title"], loc="left", color=INK, fontsize=13, pad=12)
+    fig.tight_layout()
+    fig.savefig(out, facecolor=PAPER)
+    plt.close(fig)
+
+
 def main(name: str) -> None:
     folder = ROOT / "analyses" / name
     sql = (folder / "query.sql").read_text(encoding="utf-8")
@@ -231,6 +292,9 @@ def main(name: str) -> None:
     elif name.startswith("03-repeat"):
         repeat_chart(rows, cols, folder / "chart.png", "en")
         repeat_chart(rows, cols, folder / "chart-pt.png", "pt")
+    elif name.startswith("04-vial"):
+        mix_chart(rows, cols, folder / "chart.png", "en")
+        mix_chart(rows, cols, folder / "chart-pt.png", "pt")
 
     # a small preview in the terminal
     print(" | ".join(cols))

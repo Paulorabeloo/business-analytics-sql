@@ -19,9 +19,9 @@ queries are the ones that run against the production database.
 | [01](analyses/01-pareto-customers/) | How many customers account for half of the revenue? | `join`, `group by`, `count(distinct)`, window functions, running total |
 | [02](analyses/02-customers-going-quiet/) | Which customers are going quiet, measured against their own rhythm? | `lag()` over a partition, date arithmetic, `having`, `cross join` |
 | [03](analyses/03-repeat-purchase-rate/) | How many customers come back, and why the answer depends on the unit? | `count(distinct)`, `union all`, `case` buckets, `filter`, window over a partition |
+| [04](analyses/04-vial-size-mix/) | Which vial size sells, and which one makes the money? | `group by`, two shares with `sum() over ()`, margin per group |
 
-More to come, one question at a time: which vial size sells, money sitting
-in unsold bottles.
+More to come, one question at a time: money sitting in unsold bottles.
 
 ## Reproduce
 
@@ -30,6 +30,7 @@ python scripts/generate_data.py            # writes data/*.csv and data/seed.sql
 python scripts/run_analysis.py 01-pareto-customers
 python scripts/run_analysis.py 02-customers-going-quiet
 python scripts/run_analysis.py 03-repeat-purchase-rate
+python scripts/run_analysis.py 04-vial-size-mix
 ```
 
 `run_analysis.py` uses [DuckDB](https://duckdb.org/) so you do not need a
@@ -69,9 +70,10 @@ no banco de produção.
 | [01](analyses/01-pareto-customers/) | Quantos clientes respondem por metade do faturamento? | `join`, `group by`, `count(distinct)`, funções de janela, acumulado |
 | [02](analyses/02-customers-going-quiet/) | Quais clientes estão sumindo, medido contra o ritmo de cada um? | `lag()` com partição, conta com datas, `having`, `cross join` |
 | [03](analyses/03-repeat-purchase-rate/) | Quantos clientes voltam, e por que a resposta depende da unidade? | `count(distinct)`, `union all`, faixas com `case`, `filter`, janela com partição |
+| [04](analyses/04-vial-size-mix/) | Qual tamanho mais sai, e qual traz o dinheiro? | `group by`, duas fatias com `sum() over ()`, margem por grupo |
 
-Mais por vir, uma pergunta de cada vez: qual tamanho mais sai, dinheiro
-parado em frasco não vendido.
+Mais por vir, uma pergunta de cada vez: dinheiro parado em frasco não
+vendido.
 
 ### Reproduzir
 
@@ -80,6 +82,7 @@ python scripts/generate_data.py            # gera data/*.csv e data/seed.sql
 python scripts/run_analysis.py 01-pareto-customers
 python scripts/run_analysis.py 02-customers-going-quiet
 python scripts/run_analysis.py 03-repeat-purchase-rate
+python scripts/run_analysis.py 04-vial-size-mix
 ```
 
 O `run_analysis.py` usa [DuckDB](https://duckdb.org/), então não precisa de
