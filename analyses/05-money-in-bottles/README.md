@@ -1,5 +1,7 @@
 # 05 · How much money is sitting in bottles?
 
+English · [Em português ↓](#em-português)
+
 **The sentence I gave the owner:** *"There is R$ 21.8k of perfume on the
 shelf, at cost, that has not turned into a sale yet. Most of it is the new
 batch and that is fine. 6 bottles have not sold a single decant in two

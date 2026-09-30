@@ -1,5 +1,7 @@
 # 04 · Which vial size sells, and which one makes the money?
 
+English · [Em português ↓](#em-português)
+
 **The sentence I gave the owner:** *"Half of everything you sell is 5 ml,
 so keep that shelf full. But the money is in the 10 ml: one item in four,
 four reais in ten. And the 30 ml is one sale in twenty-five and almost one

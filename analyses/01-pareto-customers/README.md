@@ -1,5 +1,7 @@
 # 01 · How many customers account for half of the revenue?
 
+English · [Em português ↓](#em-português)
+
 **The sentence I gave the owner:** *"Eight customers pay for half of everything
 we have ever sold. The other 91 split the rest. Losing one of those eight
 hurts more than losing ten of the others."*

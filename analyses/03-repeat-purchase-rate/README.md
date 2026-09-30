@@ -1,5 +1,7 @@
 # 03 · How many customers come back?
 
+English · [Em português ↓](#em-português)
+
 **The sentence I gave the owner:** *"Out of every ten people who buy once,
 six or seven buy again. The first number I got said four. Same data, same
 question: I was counting the wrong thing."*

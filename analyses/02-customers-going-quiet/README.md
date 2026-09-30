@@ -1,5 +1,7 @@
 # 02 · Which customers are going quiet?
 
+English · [Em português ↓](#em-português)
+
 **The sentence I gave the owner:** *"Three of your eight biggest customers
 have stopped. Not 'slowed down': each one used to buy every few days and
 has been silent for weeks. If you message three people this week, it is
